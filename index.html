@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz Cumpleaños 🎉</title>
+    <title>Cumpleaños Danitza 🌟</title>
     <style>
         :root {
             --color-primario: #FF6B6B;
@@ -28,20 +28,20 @@
             width: 100vw;
             height: 100vh;
             padding: 20px;
-            display: flex;
+            display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             position: fixed;
             top: 0;
             left: 0;
-            transform: translateY(100%);
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow-y: auto;
+            opacity: 0;
+            transition: opacity 1s ease;
         }
 
         .pagina.activa {
-            transform: translateY(0);
+            display: flex;
+            opacity: 1;
         }
 
         .contenido {
@@ -57,10 +57,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             cursor: pointer;
             transition: transform 0.3s;
-        }
-
-        .sorpresa-inicial:hover {
-            transform: scale(1.05);
         }
 
         .foto-marco {
@@ -100,32 +96,41 @@
             transition: transform 0.3s;
         }
 
-        .boton-siguiente:active {
-            transform: scale(0.95);
+        @keyframes aparecer {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .efecto-final {
-            font-size: 3em;
-            animation: flotar 2s ease-in-out infinite;
-            margin-top: 30px;
+        .mensaje-typed {
+            opacity: 0;
+            animation: aparecer 0.8s ease-out forwards;
+            display: inline-block;
+            margin: 5px 0;
         }
 
-        @keyframes flotar {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        @keyframes maquina-escribir {
+            from { width: 0 }
+            to { width: 100% }
         }
 
-        .decoracion {
-            position: fixed;
-            font-size: 2em;
-            opacity: 0.3;
-            z-index: -1;
-            animation: latido 3s infinite;
+        .titulo-especial {
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: maquina-escribir 3s steps(40) forwards;
         }
 
-        @keyframes latido {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+        @keyframes brillar {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        .chispa {
+            position: absolute;
+            animation: brillar 1.5s infinite;
+            pointer-events: none;
+            font-size: 1.5em;
         }
 
         @media (max-width: 480px) {
@@ -147,64 +152,70 @@
     </style>
 </head>
 <body>
-    <!-- Decoraciones de fondo -->
-    <div class="decoracion" style="top:10%; left:5%">🎈</div>
-    <div class="decoracion" style="top:20%; right:10%">🎉</div>
-    <div class="decoracion" style="bottom:15%; left:15%">🎂</div>
-
     <!-- Página 1 - Sorpresa Inicial -->
     <div class="pagina activa" id="pagina1">
         <div class="contenido">
             <div class="sorpresa-inicial" onclick="mostrarPagina(2)">
-                <h1>¡Toca para abrir! 🎁</h1>
-                <div style="font-size: 4em">🎂</div>
-                <p>Presiona para comenzar la sorpresa</p>
+                <h1 style="font-size: 2em">🎁 ¡Toca tu regalo! 🎁</h1>
+                <div style="font-size: 4em; margin: 15px 0">🎂</div>
+                <p>Haz clic para comenzar esta sorpresa especial</p>
             </div>
         </div>
     </div>
 
-    <!-- Página 2 - Felicitación con Foto -->
+    <!-- Página 2 - Felicitación -->
     <div class="pagina" id="pagina2">
         <div class="contenido">
-            <h1>¡Feliz Cumpleaños! 🎉</h1>
+            <h1 class="titulo-especial">¡Feliz Cumpleaños Danitza! 🎉</h1>
             <div class="foto-marco">
-                <img src="URL_FOTO" alt="Cumpleañero">
+                <img src="URL_FOTO" alt="Danitza">
             </div>
-            <p class="mensaje">
-                Que este día esté lleno de alegría,<br>
-                momentos inolvidables<br>
-                y mucha felicidad 🥳
-            </p>
-            <button class="boton-siguiente" onclick="mostrarPagina(3)">Siguiente ➔</button>
+            <div class="mensaje">
+                <p class="mensaje-typed" style="animation-delay: 0.5s">En tu día especial quiero desearte...</p>
+                <p class="mensaje-typed" style="animation-delay: 1s">✨ Éxitos profesionales increíbles</p>
+                <p class="mensaje-typed" style="animation-delay: 1.5s">❤️ Amor que valore tu gran corazón</p>
+                <p class="mensaje-typed" style="animation-delay: 2s">🌟 La fuerza para todas tus metas</p>
+            </div>
+            <button class="boton-siguiente" onclick="mostrarPagina(3)">Continuar ➔</button>
         </div>
     </div>
 
-    <!-- Página 3 - Mensaje Especial -->
+    <!-- Página 3 - Mensaje Personal -->
     <div class="pagina" id="pagina3">
         <div class="contenido">
-            <h1>Un Mensaje Para Ti 💌</h1>
+            <h1 class="titulo-especial">Para Ti 💌</h1>
             <div class="mensaje">
-                <p>Eres una persona increíble que merece:</p>
-                <p>❤️ Amor y respeto<br>
-                ✨ Éxito en tus proyectos<br>
-                🎉 Momentos de diversión<br>
-                🌟 Muchas bendiciones</p>
+                <p class="mensaje-typed" style="animation-delay: 0.5s">Dani, aunque nuestros caminos sean distintos...</p>
+                <p class="mensaje-typed" style="animation-delay: 1s">📚 Sé que serás una médica excepcional</p>
+                <p class="mensaje-typed" style="animation-delay: 1.5s">💖 Atesoro los buenos momentos compartidos</p>
+                <p class="mensaje-typed" style="animation-delay: 2s">🤝 Mi apoyo siempre estará aquí para ti</p>
+                <p class="mensaje-typed" style="animation-delay: 2.5s; color: var(--color-primario); margin-top: 15px;">
+                    Eres una mujer admirable y fuerte<br> 
+                    ¡Sigue conquistando el mundo! 🌍
+                </p>
             </div>
             <button class="boton-siguiente" onclick="mostrarPagina(4)">Último Mensaje 🌹</button>
         </div>
     </div>
 
-    <!-- Página 4 - Despedida -->
+    <!-- Página 4 - Despedida con Efectos -->
     <div class="pagina" id="pagina4">
-        <div class="contenido">
-            <h1>¡Gracias por ser tú! 🌟</h1>
+        <div class="contenido" style="position: relative;">
+            <div id="efecto-chispas"></div>
+            <h1 class="titulo-especial" style="color: var(--color-primario);">Tu Futuro Brillante 🌟</h1>
             <div class="mensaje">
-                <p>Que este nuevo año de vida esté lleno de:</p>
-                <p>💫 Nuevas oportunidades<br>
-                🌈 Experiencias maravillosas<br>
-                🎯 Metas cumplidas</p>
+                <p class="mensaje-typed" style="animation-delay: 0.5s">En este nuevo año de vida deseo para ti:</p>
+                <p class="mensaje-typed" style="animation-delay: 1s">💫 Logros que inspiren a otros</p>
+                <p class="mensaje-typed" style="animation-delay: 1.5s">🌈 Oportunidades extraordinarias</p>
+                <p class="mensaje-typed" style="animation-delay: 2s">❤️ Amor que merezca tu bondad</p>
+                <p class="mensaje-typed" style="animation-delay: 2.5s; position: relative;">
+                    <span style="display: block; margin-top: 15px; font-style: italic;">
+                        Aunque la vida nos lleve por rumbos diferentes,<br>
+                        siempre celebraré cada uno de tus éxitos.<br>
+                        ¡Feliz cumpleaños, guerrera! 🎗️
+                    </span>
+                </p>
             </div>
-            <div class="efecto-final">🎉❤️🎂</div>
         </div>
     </div>
 
@@ -216,23 +227,43 @@
 
     <script>
         function mostrarPagina(numPagina) {
-            // Ocultar página actual
             document.querySelector('.pagina.activa').classList.remove('activa');
-            
-            // Mostrar nueva página
             document.getElementById(`pagina${numPagina}`).classList.add('activa');
             
-            // Iniciar música en la segunda página
             if(numPagina === 2) {
                 document.getElementById('musica').play();
             }
+            
+            if(numPagina === 4) {
+                crearEfectoChispas();
+            }
         }
 
-        // Habilitar navegación con toques en móviles
-        document.querySelectorAll('.pagina').forEach(pagina => {
-            pagina.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-            }, { passive: true });
+        function crearEfectoChispas() {
+            const chispas = ['⭐'];
+            const contenedor = document.getElementById('efecto-chispas');
+            
+            // Limpiar chispas anteriores
+            contenedor.innerHTML = '';
+            
+            // Crear nuevas chispas
+            for(let i = 0; i < 15; i++) {
+                const chispa = document.createElement('div');
+                chispa.className = 'chispa';
+                chispa.style.cssText = `
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    animation-delay: ${Math.random() *5}s;
+                    font-size: ${Math.random() * 10 + 10}px;
+                `;
+                chispa.textContent = chispas[Math.floor(Math.random() * chispas.length)];
+                contenedor.appendChild(chispa);
+            }
+        }
+
+        // Iniciar animaciones de texto
+        document.querySelectorAll('.mensaje-typed').forEach((elemento, index) => {
+            elemento.style.animationDelay = `${index * 0.5}s`;
         });
     </script>
 </body>
