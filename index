@@ -37,7 +37,7 @@
 </head>
 <body>
     <h1>🎉 ¡Feliz Cumpleaños! 🎂</h1>
-    <p class="message">Espero que tengas un día increíble, lleno de amor y felicidad. 🎈💖</p>
+    <p class="message">felicidad. 🎈💖</p>
     <canvas class="balloons"></canvas>
     <script>
         const canvas = document.querySelector('.balloons');
